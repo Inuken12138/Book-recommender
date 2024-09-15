@@ -1,2 +1,1 @@
-# Book recommender
- Recommener system for books using hybrid content + collaborative filtering system
+# Comp-9727-Book-recommendation-system

@@ -1,0 +1,23 @@
+import pandas as pd
+
+# Load the original datasets
+books = pd.read_csv('books.csv')
+users = pd.read_csv('users.csv')
+ratings = pd.read_csv('ratings.csv')
+
+# Sample a subset of the data
+books_subset = books.sample(frac=0.1, random_state=42)  # 10% of books
+users_subset = users.sample(frac=0.1, random_state=42)  # 10% of users
+
+# Ensure that the ratings subset includes only the sampled books and users
+ratings_subset = ratings[
+    (ratings['ISBN'].isin(books_subset['ISBN'])) & 
+    (ratings['User-ID'].isin(users_subset['User-ID']))
+]
+
+# Save the subsets to new CSV files
+books_subset.to_csv('books_subset.csv', index=False)
+users_subset.to_csv('users_subset.csv', index=False)
+ratings_subset.to_csv('ratings_subset.csv', index=False)
+
+print("Subset datasets have been created and saved.")
